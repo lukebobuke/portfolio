@@ -8,14 +8,23 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 	const thumbnail = getProjectThumbnail(project);
 	const images = getProjectImages(project);
 
+	const handleClick = (e) => {
+		if (isFiltered) {
+			e.stopPropagation(); // Prevent background click handler
+			return;
+		}
+		onClick(e);
+	};
+
 	return (
 		<motion.div
 			className={`project-card ${isExpanded ? "expanded" : ""} ${isFiltered ? "filtered" : ""}`}
-			onClick={onClick}
+			onClick={isFiltered ? undefined : handleClick}
 			layout
 			transition={{
 				layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-			}}>
+			}}
+			style={isFiltered ? { pointerEvents: "none" } : undefined}>
 			<img src={thumbnail} alt={project.title} className="card-thumbnail" />
 			<div className="card-overlay">
 				<h3>{project.title}</h3>

@@ -11,13 +11,8 @@ function ProjectGrid({ expandedCard, setExpandedCard, activeFilter }) {
 		setExpandedCard(expandedCard === projectId ? null : projectId);
 	};
 
-	const handleGridClick = (e) => {
-		// Stop propagation on the grid itself to prevent background clicks
-		e.stopPropagation();
-	};
-
 	return (
-		<motion.div className="project-grid" layout onClick={handleGridClick}>
+		<motion.div className="project-grid" layout>
 			{projects.map((project) => {
 				const isFiltered = activeFilter !== "all" && project.category !== activeFilter;
 

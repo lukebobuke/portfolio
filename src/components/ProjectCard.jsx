@@ -10,9 +10,16 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 
 	const handleClick = (e) => {
 		if (isFiltered) {
-			e.stopPropagation(); // Prevent background click handler
+			e.stopPropagation();
 			return;
 		}
+
+		// Don't allow collapsing by clicking the expanded card
+		if (isExpanded) {
+			e.stopPropagation();
+			return;
+		}
+
 		onClick(e);
 	};
 

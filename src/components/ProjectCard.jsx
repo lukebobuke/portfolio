@@ -58,12 +58,12 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 							Visit Site
 						</a>
 					)}
-					{project.narrative && <p className="project-narrative">{project.narrative}</p>}
 					<div className="project-images">
 						{images.map((img, index) => (
 							<img key={index} src={img} alt={`${project.title} ${index + 1}`} loading="lazy" />
 						))}
 					</div>
+					{project.narrative && <p className="project-narrative">{project.narrative}</p>}
 				</motion.div>
 			)}
 		</motion.div>

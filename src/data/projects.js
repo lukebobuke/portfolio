@@ -45,7 +45,7 @@ export const projects = [
 		title: "The Brunchyard",
 		category: "architecture",
 		folder: "the-brunchyard",
-		date: "2022-10",
+		date: "2021-10",
 		narrative: "A minimalist approach...",
 		layout: "carousel",
 	},
@@ -72,7 +72,7 @@ export const projects = [
 		title: "The Mask",
 		category: "architecture",
 		folder: "the-mask",
-		date: "2021-05",
+		date: "2020-10",
 		narrative:
 			'A mixed-use high-rise design explores filtration as a core concept, examining how buildings filter people, light, views, wind, sound, and wildlife. Inspired by 2020 quarantine experiences and the "micro-commute" from bed to couch, the design splits the typical apartment building into distinct layers: active daytime spaces (work, exercise, parks) face the street as a buffer, while quiet residential areas are set back. The conventional double-loaded corridor is "peeled apart" - deep narrow residences on one side, amenities on the other, connected by bridges and open corridors, transforming circulation through the building into a meaningful spatial experience rather than just a means to an end.',
 		layout: "carousel",

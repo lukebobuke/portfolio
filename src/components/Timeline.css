@@ -1,0 +1,131 @@
+/** @format */
+
+.timeline-container {
+	background-color: black;
+	padding: 20px 0;
+	position: sticky;
+	top: 120px;
+	z-index: 90;
+}
+
+.timeline {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 40px;
+	display: flex;
+	position: relative;
+	height: 60px;
+}
+
+.timeline-segment {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+}
+
+.timeline-line {
+	width: 0px;
+	height: 30px;
+	background-color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.timeline-year {
+	color: white;
+	font-size: 10px;
+	font-weight: 100;
+	position: absolute;
+	top: 35px;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+}
+
+.timeline-dot-empty {
+	position: absolute;
+	top: 10px;
+	width: 12px;
+	height: 12px;
+	background-color: transparent;
+	border: 2px solid white;
+	border-radius: 50%;
+	transform: translateX(-50%);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	z-index: 1;
+}
+
+.timeline-dot-empty:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+	transform: translateX(-50%) scale(1.2);
+}
+
+.timeline-dot-filtered {
+	opacity: 0.2;
+	cursor: default;
+	pointer-events: none;
+}
+
+.timeline-dot-filled {
+	position: absolute;
+	top: 10px;
+	width: 12px;
+	height: 12px;
+	background-color: white;
+	border-radius: 50%;
+	transform: translateX(-50%);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.timeline-dot-filled-no-transform {
+	transform: none;
+}
+
+.timeline-dot {
+	position: absolute;
+	top: 10px;
+	width: 12px;
+	height: 12px;
+	background-color: white;
+	border-radius: 50%;
+	transform: translateX(-50%);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+	.timeline-container {
+		top: 100px;
+	}
+
+	.timeline {
+		padding: 0 20px;
+		height: 50px;
+	}
+
+	.timeline-year {
+		font-size: 11px;
+		top: 30px;
+	}
+
+	.timeline-line {
+		height: 25px;
+	}
+
+	.timeline-dot-empty,
+	.timeline-dot-filled,
+	.timeline-dot {
+		top: 8px;
+		width: 10px;
+		height: 10px;
+	}
+
+	.timeline-dot-empty {
+		border-width: 1.5px;
+	}
+}

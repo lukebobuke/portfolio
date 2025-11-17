@@ -3,10 +3,16 @@
 import { useState } from "react";
 import "./App.css";
 import ProjectGrid from "./components/ProjectGrid";
+import Timeline from "./components/Timeline";
+import { projects } from "./data/projects";
 
 function App() {
 	const [expandedCard, setExpandedCard] = useState(null);
 	const [activeFilter, setActiveFilter] = useState("all");
+
+	// Get the date of the expanded project
+	const selectedProject = projects.find((p) => p.id === expandedCard);
+	const selectedDate = selectedProject ? selectedProject.date : null;
 
 	const handleBackgroundClick = () => {
 		if (expandedCard) {
@@ -19,6 +25,10 @@ function App() {
 	const handleFilterClick = (category, event) => {
 		event.stopPropagation();
 		setActiveFilter(activeFilter === category ? "all" : category);
+	};
+
+	const handleTimelineProjectSelect = (projectId) => {
+		setExpandedCard(projectId);
 	};
 
 	return (
@@ -39,6 +49,7 @@ function App() {
 					</button>
 				</div>
 			</header>
+			<Timeline selectedDate={selectedDate} projects={projects} onProjectSelect={handleTimelineProjectSelect} activeFilter={activeFilter} />
 			<ProjectGrid expandedCard={expandedCard} setExpandedCard={setExpandedCard} activeFilter={activeFilter} />
 		</div>
 	);

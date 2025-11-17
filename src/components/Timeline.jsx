@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "./Timeline.css";
 
 function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
-	const startYear = 2013;
+	const startYear = 2017;
 	const endYear = 2026;
 	const years = [];
 

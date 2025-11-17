@@ -64,7 +64,8 @@ export const projects = [
 		category: "architecture",
 		folder: "the-fieldhouse",
 		date: "2022-10",
-		narrative: "The restoration of this historic Chicago Park Fieldhouse in the Pulaski Park neighborhood involved structural, aesthetic, and accessibility improvements.  ",
+		narrative:
+			"The restoration of this historic Chicago Park Fieldhouse in the Pulaski Park neighborhood involved structural, aesthetic, and accessibility improvements.  ",
 		layout: "carousel",
 	},
 	{
@@ -86,5 +87,6 @@ export const projects = [
 		narrative:
 			"Check the weather, manage tasks, and monitor your projects all in one place with this sleek and intuitive dashboard design. Featuring real-time data updates, and a user-friendly interface, and selectable color schemes, this dashboard is perfect for professionals looking to stay organized and efficient throughout their day.",
 		layout: "carousel",
+		link: "https://lukebobuke.github.io/dashboard/",
 	},
 ];

@@ -48,6 +48,16 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 					transition={{ delay: 0.2, duration: 0.3 }}>
 					<h2>{project.title}</h2>
 					<p className="project-date">{project.date}</p>
+					{project.link && (
+						<a
+							href={project.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="visit-site-btn"
+							onClick={(e) => e.stopPropagation()}>
+							Visit Site
+						</a>
+					)}
 					{project.narrative && <p className="project-narrative">{project.narrative}</p>}
 					<div className="project-images">
 						{images.map((img, index) => (

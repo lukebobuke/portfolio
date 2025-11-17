@@ -12,26 +12,21 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 		years.push(year);
 	}
 
-	// Calculate dot position based on date string
+	// Calculate dot position based on date string (for vertical timeline)
 	const calculateDotPosition = (dateString) => {
 		if (!dateString) return null;
 
 		const [year, month] = dateString.split("-").map(Number);
 
-		// Calculate position as percentage
-		// Each segment is one year, with years.length total segments
-		const segmentWidth = 100 / years.length; // Width of one segment in %
-		const yearIndex = year - startYear; // Which segment (0-based)
-		const monthProgress = (month - 1) / 12; // Position within the year (0 to ~0.92)
-
-		// Position = start of year segment + progress through that segment
-		const position = (yearIndex + monthProgress) * segmentWidth;
+		// Calculate position as percentage from top to bottom (REVERSED - newest at top)
+		const totalYears = endYear - startYear;
+		const yearProgress = year - startYear;
+		const monthProgress = month / 12;
+		// Position within the full timeline (0 to 100%)
+		const position = ((yearProgress + monthProgress) / totalYears) * 100;
 
 		return position;
 	};
-
-	const selectedDotPosition = calculateDotPosition(selectedDate);
-
 	const handleEmptyDotClick = (projectId, isFiltered, e) => {
 		e.stopPropagation();
 		if (!isFiltered) {
@@ -41,55 +36,46 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 
 	return (
 		<div className="timeline-container">
-			<div className="timeline">
+			<div className="timeline-vertical">
+				{/* Main vertical line */}
+				<div className="timeline-line-vertical"></div>
+				{/* Year labels */}
 				{years.map((year, index) => {
-					// Find projects for this year
-					const yearProjects = projects.filter((p) => {
-						if (!p.date) return false;
-						const [projectYear] = p.date.split("-").map(Number);
-						return projectYear === year;
-					});
-
-					// Check if selected project is in this year
-					const selectedYear = selectedDate ? Number(selectedDate.split("-")[0]) : null;
-					const selectedMonth = selectedDate ? Number(selectedDate.split("-")[1]) : null;
-					const isSelectedYearSegment = selectedYear === year;
+					// Position from 0% to 100% (2017 at 0%, 2026 at 100%)
+					const position = (index / (years.length - 1)) * 100;
 
 					return (
-						<div key={year} className="timeline-segment">
-							<div className="timeline-line"></div>
-							<div className="timeline-year">{year}</div>
-							{index === years.length - 1 && <div className="timeline-line" style={{ left: "100%" }}></div>}
-							{/* Dots for projects in this year */}
-							{yearProjects.map((project) => {
-								const [, month] = project.date.split("-").map(Number);
-								const monthProgress = ((month - 1) / 12) * 100; // 0% to ~92%
-								const isFiltered = activeFilter !== "all" && project.category !== activeFilter;
-
-								return (
-									<div
-										key={project.id}
-										className={`timeline-dot-empty ${isFiltered ? "timeline-dot-filtered" : ""}`}
-										style={{ left: `${monthProgress}%` }}
-										onClick={(e) => handleEmptyDotClick(project.id, isFiltered, e)}
-										title={project.title}
-									/>
-								);
-							})}{" "}
-							{/* Filled dot for selected project in this segment */}
-							{isSelectedYearSegment && selectedMonth && (
-								<motion.div
-									className="timeline-dot-filled timeline-dot-filled-no-transform"
-									style={{ left: `calc(${((selectedMonth - 1) / 12) * 100}% - 6px)` }}
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									transition={{ opacity: { duration: 0.2 } }}
-									layoutId="selected-dot"
-								/>
-							)}
+						<div key={year} className="timeline-year-marker" style={{ "--year-position": `${position}%` }}>
+							<div className="timeline-year-label">{year}</div>
 						</div>
 					);
+				})}{" "}
+				{/* All project dots */}
+				{projects.map((project) => {
+					if (!project.date) return null;
+
+					const dotPosition = calculateDotPosition(project.date);
+					const isFiltered = activeFilter !== "all" && project.category !== activeFilter;
+					const isSelected = selectedDate === project.date;
+
+					return (
+						<div
+							key={project.id}
+							className={`timeline-dot-vertical ${isFiltered ? "timeline-dot-filtered" : ""}`}
+							style={{ "--dot-position": `${dotPosition}%` }}
+							onClick={(e) => handleEmptyDotClick(project.id, isFiltered, e)}
+							title={project.title}
+						/>
+					);
 				})}
+				{/* Filled dot for selected project */}
+				{selectedDate &&
+					(() => {
+						const selectedProject = projects.find((p) => p.date === selectedDate);
+						const dotPosition = selectedProject ? calculateDotPosition(selectedProject.date) : calculateDotPosition(selectedDate);
+
+						return <div className="timeline-dot-filled-vertical" style={{ "--dot-position": `${dotPosition}%` }} />;
+					})()}
 			</div>
 		</div>
 	);

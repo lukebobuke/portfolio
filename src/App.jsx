@@ -49,8 +49,10 @@ function App() {
 					</button>
 				</div>
 			</header>
-			<Timeline selectedDate={selectedDate} projects={projects} onProjectSelect={handleTimelineProjectSelect} activeFilter={activeFilter} />
-			<ProjectGrid expandedCard={expandedCard} setExpandedCard={setExpandedCard} activeFilter={activeFilter} />
+			<div className="main-content">
+				<Timeline selectedDate={selectedDate} projects={projects} onProjectSelect={handleTimelineProjectSelect} activeFilter={activeFilter} />
+				<ProjectGrid expandedCard={expandedCard} setExpandedCard={setExpandedCard} activeFilter={activeFilter} />
+			</div>
 		</div>
 	);
 }

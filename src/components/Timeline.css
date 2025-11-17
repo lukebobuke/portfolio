@@ -2,66 +2,70 @@
 
 .timeline-container {
 	background-color: black;
-	padding: 20px 0;
-	position: sticky;
-	top: 120px;
-	z-index: 90;
-}
-
-.timeline {
-	max-width: 1400px;
-	margin: 0 auto;
-	padding: 0 40px;
-	display: flex;
-	position: relative;
-	height: 60px;
-}
-
-.timeline-segment {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	position: relative;
-}
-
-.timeline-line {
-	width: 0px;
-	height: 30px;
-	background-color: white;
-	position: absolute;
-	top: 0;
+	position: fixed;
 	left: 0;
+	top: 60px;
+	bottom: 0;
+	width: 200px;
+	z-index: 90;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.timeline-year {
-	color: white;
-	font-size: 10px;
-	font-weight: 100;
+.timeline-vertical {
+	position: relative;
+	height: 80%;
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.timeline-line-vertical {
 	position: absolute;
-	top: 35px;
 	left: 50%;
 	transform: translateX(-50%);
-	white-space: nowrap;
+	top: 0;
+	bottom: 0;
+	width: 1px;
+	background-color: white;
 }
 
-.timeline-dot-empty {
+.timeline-year-marker {
 	position: absolute;
-	top: 10px;
-	width: 12px;
-	height: 12px;
+	left: 50%;
+	top: calc(100% - var(--year-position));
+	transform: translateY(-50%);
+	width: 100%;
+}
+
+.timeline-year-label {
+	color: white;
+	font-size: 13px;
+	font-weight: 100;
+	text-align: center;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.timeline-dot-vertical {
+	position: absolute;
+	top: var(--dot-position);
+	width: 10px;
+	height: 10px;
 	background-color: transparent;
 	border: 2px solid white;
 	border-radius: 50%;
-	transform: translateX(-50%);
 	cursor: pointer;
-	transition: all 0.2s ease;
 	z-index: 1;
 }
 
-.timeline-dot-empty:hover {
-	background-color: rgba(255, 255, 255, 0.3);
-	transform: translateX(-50%) scale(1.2);
+@media (hover: hover) {
+	.timeline-dot-vertical:hover {
+		background-color: rgba(255, 255, 255, 0.3);
+		transform: scale(1.3);
+	}
 }
 
 .timeline-dot-filtered {
@@ -70,62 +74,65 @@
 	pointer-events: none;
 }
 
-.timeline-dot-filled {
+.timeline-dot-filled-vertical {
 	position: absolute;
-	top: 10px;
-	width: 12px;
-	height: 12px;
+	top: var(--dot-position);
+	width: 10px;
+	height: 10px;
 	background-color: white;
 	border-radius: 50%;
-	transform: translateX(-50%);
 	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 	z-index: 2;
 	pointer-events: none;
-}
-
-.timeline-dot-filled-no-transform {
-	transform: none;
-}
-
-.timeline-dot {
-	position: absolute;
-	top: 10px;
-	width: 12px;
-	height: 12px;
-	background-color: white;
-	border-radius: 50%;
-	transform: translateX(-50%);
-	box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	transition: top 0.3s ease, left 0.3s ease;
 }
 
 @media (max-width: 768px) {
 	.timeline-container {
-		top: 100px;
+		position: sticky;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100px;
+		flex-direction: row;
+		z-index: 101;
 	}
 
-	.timeline {
-		padding: 0 20px;
-		height: 50px;
+	.timeline-vertical {
+		width: 80%;
+		height: 100%;
+		flex-direction: row;
 	}
 
-	.timeline-year {
-		font-size: 11px;
-		top: 30px;
+	.timeline-line-vertical {
+		left: 0;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 100%;
+		height: 1px;
 	}
 
-	.timeline-line {
-		height: 25px;
+	.timeline-year-marker {
+		left: var(--year-position);
+		top: 50%;
+		transform: translate(-50%, -50%);
 	}
 
-	.timeline-dot-empty,
-	.timeline-dot-filled,
-	.timeline-dot {
-		top: 8px;
-		width: 10px;
-		height: 10px;
+	.timeline-year-label {
+		font-size: 10px;
+		margin-top: 25px;
 	}
 
-	.timeline-dot-empty {
-		border-width: 1.5px;
+	.timeline-dot-vertical {
+		top: 50%;
+		left: var(--dot-position);
+		transform: translate(-50%, -50%);
+	}
+
+	.timeline-dot-filled-vertical {
+		top: 50%;
+		left: var(--dot-position);
+		transform: translate(-50%, -50%);
 	}
 }

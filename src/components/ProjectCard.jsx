@@ -31,7 +31,10 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 			transition={{
 				layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
 			}}
-			style={isFiltered ? { pointerEvents: "none" } : undefined}>
+			style={{
+				...(isFiltered ? { pointerEvents: "none" } : {}),
+				aspectRatio: "1 / 1",
+			}}>
 			<img src={thumbnail} alt={project.title} className="card-thumbnail" />
 			<div className="card-overlay">
 				<h3>{project.title}</h3>

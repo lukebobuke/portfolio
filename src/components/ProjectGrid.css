@@ -3,10 +3,11 @@
 .project-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(5, 1fr);
 	gap: 3rem;
 	padding: 3rem;
-	grid-auto-rows: 1fr;
 	grid-auto-flow: dense;
+	margin-left: 200px;
 }
 
 @media (max-width: 1200px) {
@@ -26,6 +27,8 @@
 		grid-template-columns: repeat(2, 1fr);
 		padding: 1rem;
 		gap: 1rem;
+		margin-left: 0;
+		margin-top: 100px;
 	}
 }
 

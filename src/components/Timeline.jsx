@@ -12,21 +12,22 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 		years.push(year);
 	}
 
-	// Calculate dot position based on date string (for vertical timeline)
+	// Calculate dot position based on date string (newest at top/left)
 	const calculateDotPosition = (dateString) => {
 		if (!dateString) return null;
 
 		const [year, month] = dateString.split("-").map(Number);
 
-		// Calculate position as percentage from top to bottom (REVERSED - newest at top)
+		// Calculate position as percentage, reversed so newest is at 0%
 		const totalYears = endYear - startYear;
 		const yearProgress = year - startYear;
 		const monthProgress = month / 12;
-		// Position within the full timeline (0 to 100%)
 		const position = ((yearProgress + monthProgress) / totalYears) * 100;
 
-		return position;
+		// Reverse so newest dates = 0%, oldest = 100%
+		return 100 - position;
 	};
+
 	const handleEmptyDotClick = (projectId, isFiltered, e) => {
 		e.stopPropagation();
 		if (!isFiltered) {

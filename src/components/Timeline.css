@@ -126,13 +126,13 @@
 
 	.timeline-dot-vertical {
 		top: 50%;
-		left: var(--dot-position);
+		left: calc(100% - var(--dot-position));
 		transform: translate(-50%, -50%);
 	}
 
 	.timeline-dot-filled-vertical {
 		top: 50%;
-		left: var(--dot-position);
+		left: calc(100% - var(--dot-position));
 		transform: translate(-50%, -50%);
 	}
 }

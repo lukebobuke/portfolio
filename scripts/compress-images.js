@@ -19,14 +19,20 @@ async function compressImage(inputPath, outputPath, isThumbnail = false) {
 	try {
 		const stats = fs.statSync(inputPath);
 		const originalSize = stats.size;
+		const ext = path.extname(inputPath).toLowerCase();
 
-		await sharp(inputPath)
-			.resize(MAX_WIDTH, null, {
-				withoutEnlargement: true,
-				fit: "inside",
-			})
-			.jpeg({ quality: isThumbnail ? THUMBNAIL_QUALITY : QUALITY, mozjpeg: true })
-			.toFile(outputPath);
+		const image = sharp(inputPath).resize(MAX_WIDTH, null, {
+			withoutEnlargement: true,
+			fit: "inside",
+		});
+
+		// Handle PNG files with transparency
+		if (ext === ".png") {
+			await image.png({ quality: isThumbnail ? THUMBNAIL_QUALITY : QUALITY, compressionLevel: 9 }).toFile(outputPath);
+		} else {
+			// Convert JPG/JPEG to JPEG
+			await image.jpeg({ quality: isThumbnail ? THUMBNAIL_QUALITY : QUALITY, mozjpeg: true }).toFile(outputPath);
+		}
 
 		const newStats = fs.statSync(outputPath);
 		const newSize = newStats.size;

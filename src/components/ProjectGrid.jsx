@@ -11,9 +11,14 @@ function ProjectGrid({ expandedCard, setExpandedCard, activeFilter }) {
 		setExpandedCard(expandedCard === projectId ? null : projectId);
 	};
 
+	// Sort projects by date (newest first)
+	const sortedProjects = [...projects].sort((a, b) => {
+		return new Date(b.date) - new Date(a.date);
+	});
+
 	return (
 		<motion.div className="project-grid" layout>
-			{projects.map((project) => {
+			{sortedProjects.map((project) => {
 				const isFiltered = activeFilter !== "all" && project.category !== activeFilter;
 
 				return (

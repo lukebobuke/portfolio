@@ -1,5 +1,9 @@
 /** @format */
 
+:root {
+	--header-height: 60px;
+}
+
 .App {
 	min-height: 100vh;
 	background: white;
@@ -9,17 +13,18 @@
 }
 
 header {
-	position: -webkit-sticky;
-	position: sticky;
+	position: fixed;
 	top: 0;
 	background: black;
 	color: white;
-	z-index: 102;
+	z-index: 99;
 	padding: 1rem 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-shrink: 0;
+	width: 100%;
+	height: var(--header-height);
 }
 
 header h1 {
@@ -61,17 +66,23 @@ header h1 {
 }
 
 @media (max-width: 768px) {
+	:root {
+		--header-height: 70px;
+	}
+
 	header {
-		position: -webkit-sticky;
-		position: sticky;
+		position: fixed;
 		flex-direction: column;
-		gap: 1rem;
-		align-items: flex-start;
+		gap: 0.5rem;
+		align-items: center;
+		height: var(--header-height);
+		padding: 0.75rem 1rem;
 	}
 
 	.filter-buttons {
 		gap: 1rem;
 		width: 100%;
+		justify-content: center;
 	}
 
 	.filter-btn {

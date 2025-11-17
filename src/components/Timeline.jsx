@@ -4,15 +4,13 @@ import { motion } from "framer-motion";
 import "./Timeline.css";
 
 function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
-	const startYear = 2017;
+	const startYear = 2019;
 	const endYear = 2026;
 	const years = [];
 
 	for (let year = startYear; year <= endYear; year++) {
 		years.push(year);
-	}
-
-	// Calculate dot position based on date string (newest at top/left)
+	} // Calculate dot position based on date string (newest at top/left)
 	const calculateDotPosition = (dateString) => {
 		if (!dateString) return null;
 

@@ -26,8 +26,9 @@ export const projects = [
 		title: "The Tower",
 		category: "architecture",
 		folder: "the-tower",
-		date: "2022-05",
-		narrative: "A minimalist approach...",
+		date: "2022-04",
+		narrative:
+			"This 2-mile tower made entirely of wood required extensive study exploring how to push the material to its absolute limit. Designed as an inhabitable environmental repair machine, the tower's roots grow into a network that enables the repair of air and water to extend to faraway places. This root network also braces the structures, making them stronger, and enables the growth of new towers, transforming the repair process into an enjoyable experience. One could walk through a renewable bamboo forest high in the sky or climb through stacks of oxygen generators.",
 		layout: "carousel",
 	},
 	{
@@ -46,7 +47,7 @@ export const projects = [
 		category: "architecture",
 		folder: "the-brunchyard",
 		date: "2021-10",
-		narrative: "A minimalist approach...",
+		narrative: "A fun interiors project meant to evoke the playful atmosphere of dining alfresco with neighbors for a weekend brunch.",
 		layout: "carousel",
 	},
 	{
@@ -54,8 +55,9 @@ export const projects = [
 		title: "The Cover",
 		category: "design",
 		folder: "the-cover",
-		date: "2022-10",
-		narrative: "A minimalist approach...",
+		date: "2020-05",
+		narrative:
+			"A graphic design project for the memoir of a family friend.  The design took inspiration from his love of film and the joy and awkwardness of finally finding his true love.",
 		layout: "carousel",
 	},
 	{
@@ -63,7 +65,7 @@ export const projects = [
 		title: "The Fieldhouse",
 		category: "architecture",
 		folder: "the-fieldhouse",
-		date: "2022-10",
+		date: "2023-05",
 		narrative:
 			"The restoration of this historic Chicago Park Fieldhouse in the Pulaski Park neighborhood involved structural, aesthetic, and accessibility improvements.  ",
 		layout: "carousel",
@@ -73,7 +75,7 @@ export const projects = [
 		title: "The Mask",
 		category: "architecture",
 		folder: "the-mask",
-		date: "2020-10",
+		date: "2020-12",
 		narrative:
 			'A mixed-use high-rise design explores filtration as a core concept, examining how buildings filter people, light, views, wind, sound, and wildlife. Inspired by 2020 quarantine experiences and the "micro-commute" from bed to couch, the design splits the typical apartment building into distinct layers: active daytime spaces (work, exercise, parks) face the street as a buffer, while quiet residential areas are set back. The conventional double-loaded corridor is "peeled apart" - deep narrow residences on one side, amenities on the other, connected by bridges and open corridors, transforming circulation through the building into a meaningful spatial experience rather than just a means to an end.',
 		layout: "carousel",
@@ -88,5 +90,15 @@ export const projects = [
 			"Check the weather, manage tasks, and monitor your projects all in one place with this sleek and intuitive dashboard design. Featuring real-time data updates, and a user-friendly interface, and selectable color schemes, this dashboard is perfect for professionals looking to stay organized and efficient throughout their day.",
 		layout: "carousel",
 		link: "https://lukebobuke.github.io/dashboard/",
+	},
+	{
+		id: 10,
+		title: "follies",
+		category: "coding",
+		folder: "follies",
+		date: "2020-09",
+		narrative:
+			"A series of playful architectural follies designed to engage the public and encourage exploration. Each folly offers a unique experience, inviting visitors to interact with the space in unexpected ways.",
+		layout: "carousel",
 	},
 ];

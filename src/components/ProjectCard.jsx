@@ -61,7 +61,7 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 					{project.narrative && <p className="project-narrative">{project.narrative}</p>}
 					<div className="project-images">
 						{images.map((img, index) => (
-							<img key={index} src={img} alt={`${project.title} ${index + 1}`} />
+							<img key={index} src={img} alt={`${project.title} ${index + 1}`} loading="lazy" />
 						))}
 					</div>
 				</motion.div>

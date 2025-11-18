@@ -18,17 +18,20 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 
 		const [year, month] = dateString.split("-").map(Number);
 
-		// Calculate position with same offset as year labels
-		const totalYears = endYear - startYear;
-		const totalIntervals = years.length - 1;
-		const halfInterval = 0.5 / totalIntervals;
+		// Timeline represents Jan 1, 2019 (0%) to Dec 31, 2026 (100%)
+		// Total span: 8 years = 96 months
+		const totalYears = endYear - startYear + 1; // 2026 - 2019 + 1 = 8 years
+		const totalMonths = totalYears * 12; // 96 months
 
-		const yearProgress = year - startYear;
-		const monthProgress = (month - 1) / 12; // month 1-12, so subtract 1 for proper centering
-		const normalizedPosition = (yearProgress + monthProgress) / totalYears;
+		// Calculate how many years have passed from start year
+		const yearsPassed = year - startYear;
+		const yearPercentage = (yearsPassed / totalYears) * 100;
 
-		// Apply same offset as year labels: from halfInterval to (1 - halfInterval)
-		const position = (halfInterval + normalizedPosition * (1 - 2 * halfInterval)) * 100;
+		// Calculate how many months into the current year (0-11)
+		const monthsIntoYear = month - 1; // January = 0, December = 11
+		const monthPercentage = (monthsIntoYear / totalMonths) * 100;
+
+		const position = yearPercentage + monthPercentage;
 
 		// Reverse so newest dates = 0%, oldest = 100%
 		return 100 - position;

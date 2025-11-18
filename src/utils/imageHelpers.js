@@ -3,14 +3,14 @@
 // Import all images from the projects folder structure
 const allImages = import.meta.glob("/public/projects/**/images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
 	eager: true,
-	as: "url",
-	exhaustive: false,
+	query: "?url",
+	import: "default",
 });
 
 const allThumbnails = import.meta.glob("/public/projects/**/thumbnail/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
 	eager: true,
-	as: "url",
-	exhaustive: false,
+	query: "?url",
+	import: "default",
 });
 
 /**
@@ -21,6 +21,7 @@ export const getProjectThumbnail = (project) => {
 	const thumbnailKey = Object.keys(allThumbnails).find((key) => key.includes(`/public/projects/${project.folder}/thumbnail/`));
 
 	if (thumbnailKey) {
+		// With query/import, the value is already the URL string
 		return allThumbnails[thumbnailKey];
 	}
 
@@ -36,7 +37,7 @@ export const getProjectImages = (project) => {
 	const projectImages = Object.keys(allImages)
 		.filter((key) => key.includes(`/public/projects/${project.folder}/images/`))
 		.sort() // Sort alphabetically (1.jpg, 2.jpg, etc.)
-		.map((key) => allImages[key]);
+		.map((key) => allImages[key]); // With query/import, value is already the URL string
 
 	return projectImages;
 };

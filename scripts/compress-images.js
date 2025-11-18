@@ -13,7 +13,8 @@ const projectsDir = path.join(__dirname, "..", "public", "projects");
 // Configuration
 const QUALITY = 80; // JPEG quality (0-100)
 const MAX_WIDTH = 1920; // Max width for images
-const THUMBNAIL_QUALITY = 85; // Slightly higher quality for thumbnails
+const THUMBNAIL_QUALITY = 50; // Much lower quality for thumbnails for faster loading
+const THUMBNAIL_MAX_WIDTH = 800; // Smaller size for thumbnails
 
 async function compressImage(inputPath, outputPath, isThumbnail = false) {
 	try {
@@ -21,17 +22,20 @@ async function compressImage(inputPath, outputPath, isThumbnail = false) {
 		const originalSize = stats.size;
 		const ext = path.extname(inputPath).toLowerCase();
 
-		const image = sharp(inputPath).resize(MAX_WIDTH, null, {
+		const maxWidth = isThumbnail ? THUMBNAIL_MAX_WIDTH : MAX_WIDTH;
+		const quality = isThumbnail ? THUMBNAIL_QUALITY : QUALITY;
+
+		const image = sharp(inputPath).resize(maxWidth, null, {
 			withoutEnlargement: true,
 			fit: "inside",
 		});
 
 		// Handle PNG files with transparency
 		if (ext === ".png") {
-			await image.png({ quality: isThumbnail ? THUMBNAIL_QUALITY : QUALITY, compressionLevel: 9 }).toFile(outputPath);
+			await image.png({ quality: quality, compressionLevel: 9 }).toFile(outputPath);
 		} else {
 			// Convert JPG/JPEG to JPEG
-			await image.jpeg({ quality: isThumbnail ? THUMBNAIL_QUALITY : QUALITY, mozjpeg: true }).toFile(outputPath);
+			await image.jpeg({ quality: quality, mozjpeg: true }).toFile(outputPath);
 		}
 
 		const newStats = fs.statSync(outputPath);

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { getProjectThumbnail, getProjectImages } from "../utils/imageHelpers";
 import "./ProjectCard.css";
 
-function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
+function ProjectCard({ project, isExpanded, isFiltered, onClick, isInitialLoad, animationIndex }) {
 	const thumbnail = getProjectThumbnail(project);
 	const images = getProjectImages(project);
 
@@ -27,15 +27,15 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 
 	return (
 		<motion.div
-			className={`project-card ${isExpanded ? "expanded" : ""} ${isFiltered ? "filtered" : ""}`}
+			className={`project-card ${isExpanded ? "expanded" : ""} ${isFiltered ? "filtered" : ""} ${isInitialLoad ? "initial-load" : ""}`}
 			onClick={handleClick}
 			layout
 			transition={{
 				layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
 			}}
 			style={{
-				...(isFiltered ? { pointerEvents: "none" } : {}),
 				aspectRatio: "1 / 1",
+				"--animation-delay": `${animationIndex * 0.05}s`,
 			}}>
 			<img src={thumbnail} alt={project.title} className="card-thumbnail" />
 			<div className="card-overlay">

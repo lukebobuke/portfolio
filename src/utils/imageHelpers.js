@@ -1,14 +1,16 @@
 /** @format */
 
 // Import all images from the projects folder structure
-const allImages = import.meta.glob("/public/projects/**/images/*.{jpg,jpeg,png,webp}", {
+const allImages = import.meta.glob("/public/projects/**/images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
 	eager: true,
 	as: "url",
+	exhaustive: false,
 });
 
-const allThumbnails = import.meta.glob("/public/projects/**/thumbnail/*.{jpg,jpeg,png,webp}", {
+const allThumbnails = import.meta.glob("/public/projects/**/thumbnail/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", {
 	eager: true,
 	as: "url",
+	exhaustive: false,
 });
 
 /**
@@ -16,7 +18,7 @@ const allThumbnails = import.meta.glob("/public/projects/**/thumbnail/*.{jpg,jpe
  */
 export const getProjectThumbnail = (project) => {
 	// Find thumbnail in the imported glob
-	const thumbnailKey = Object.keys(allThumbnails).find((key) => key.includes(`/projects/${project.folder}/thumbnail/`));
+	const thumbnailKey = Object.keys(allThumbnails).find((key) => key.includes(`/public/projects/${project.folder}/thumbnail/`));
 
 	if (thumbnailKey) {
 		return allThumbnails[thumbnailKey];
@@ -32,7 +34,7 @@ export const getProjectThumbnail = (project) => {
 export const getProjectImages = (project) => {
 	// Filter images that belong to this project
 	const projectImages = Object.keys(allImages)
-		.filter((key) => key.includes(`/projects/${project.folder}/images/`))
+		.filter((key) => key.includes(`/public/projects/${project.folder}/images/`))
 		.sort() // Sort alphabetically (1.jpg, 2.jpg, etc.)
 		.map((key) => allImages[key]);
 

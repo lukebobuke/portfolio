@@ -90,10 +90,11 @@
 @media (max-width: 768px) {
 	.timeline-container {
 		position: fixed;
-		top: var(--header-height);
+		top: calc(var(--header-height));
 		left: 0;
 		width: 100%;
 		height: 60px;
+		padding-bottom: 1rem;
 		flex-direction: row;
 		z-index: 101;
 		margin-top: 0;

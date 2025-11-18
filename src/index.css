@@ -1,5 +1,11 @@
 /** @format */
 
+:root {
+	--bg-base: rgb(228, 233, 237);
+	--card-shadow-light: rgba(250, 250, 250, 1);
+	--card-shadow-dark: rgba(200, 210, 220, 1);
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -10,4 +16,5 @@ body {
 	font-family: "Outfit", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background: linear-gradient(145deg, #e8ecf0 0%, #dfe4e8 100%);
 }

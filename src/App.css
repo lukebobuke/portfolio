@@ -6,7 +6,7 @@
 
 .App {
 	min-height: 100vh;
-	background: white;
+	background: var(--bg-base);
 	display: flex;
 	flex-direction: column;
 	overflow-x: hidden;

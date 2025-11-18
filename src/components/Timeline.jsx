@@ -10,17 +10,25 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 
 	for (let year = startYear; year <= endYear; year++) {
 		years.push(year);
-	} // Calculate dot position based on date string (newest at top/left)
+	}
+
+	// Calculate dot position based on date string (newest at top/left)
 	const calculateDotPosition = (dateString) => {
 		if (!dateString) return null;
 
 		const [year, month] = dateString.split("-").map(Number);
 
-		// Calculate position as percentage, reversed so newest is at 0%
+		// Calculate position with same offset as year labels
 		const totalYears = endYear - startYear;
+		const totalIntervals = years.length - 1;
+		const halfInterval = 0.5 / totalIntervals;
+
 		const yearProgress = year - startYear;
-		const monthProgress = month / 12;
-		const position = ((yearProgress + monthProgress) / totalYears) * 100;
+		const monthProgress = (month - 1) / 12; // month 1-12, so subtract 1 for proper centering
+		const normalizedPosition = (yearProgress + monthProgress) / totalYears;
+
+		// Apply same offset as year labels: from halfInterval to (1 - halfInterval)
+		const position = (halfInterval + normalizedPosition * (1 - 2 * halfInterval)) * 100;
 
 		// Reverse so newest dates = 0%, oldest = 100%
 		return 100 - position;
@@ -40,8 +48,23 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 				<div className="timeline-line-vertical"></div>
 				{/* Year labels */}
 				{years.map((year, index) => {
-					// Position from 0% to 100% (2017 at 0%, 2026 at 100%)
-					const position = (index / (years.length - 1)) * 100;
+					// Calculate position with offset so first/last years appear in middle of their space
+					// The range spans from half an interval from the edges
+					const totalIntervals = years.length - 1;
+					const halfInterval = 0.5 / totalIntervals;
+
+					// Position from halfInterval to (1 - halfInterval)
+					let position;
+					if (index === 0) {
+						// First year: offset by half interval
+						position = halfInterval * 100;
+					} else if (index === years.length - 1) {
+						// Last year: offset by half interval from end
+						position = (1 - halfInterval) * 100;
+					} else {
+						// Middle years: distributed proportionally
+						position = (halfInterval + (index / totalIntervals) * (1 - 2 * halfInterval)) * 100;
+					}
 
 					return (
 						<div key={year} className="timeline-year-marker" style={{ "--year-position": `${position}%` }}>

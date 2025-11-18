@@ -10,7 +10,9 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 
 	const handleClick = (e) => {
 		if (isFiltered) {
+			// Completely stop event for filtered cards
 			e.stopPropagation();
+			e.preventDefault();
 			return;
 		}
 
@@ -26,7 +28,7 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 	return (
 		<motion.div
 			className={`project-card ${isExpanded ? "expanded" : ""} ${isFiltered ? "filtered" : ""}`}
-			onClick={isFiltered ? undefined : handleClick}
+			onClick={handleClick}
 			layout
 			transition={{
 				layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
@@ -46,7 +48,10 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick }) {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.2, duration: 0.3 }}>
-					<h2>{project.title}</h2>
+					<div className="project-header">
+						<h2>{project.title}</h2>
+						{project.tagline && <span className="project-tagline">{project.tagline}</span>}
+					</div>
 					<p className="project-date">{project.date}</p>
 					{project.link && (
 						<a

@@ -63,18 +63,6 @@ async function processDirectory(dir, isThumbnail = false) {
 		// Check if it's an image file
 		const ext = path.extname(file).toLowerCase();
 		if ([".jpg", ".jpeg", ".png", ".webp"].includes(ext)) {
-			// Create backup directory
-			const backupDir = path.join(dir, "originals");
-			if (!fs.existsSync(backupDir)) {
-				fs.mkdirSync(backupDir);
-			}
-
-			// Backup original
-			const backupPath = path.join(backupDir, file);
-			if (!fs.existsSync(backupPath)) {
-				fs.copyFileSync(filePath, backupPath);
-			}
-
 			// Compress and replace
 			const tempPath = path.join(dir, `temp_${file}`);
 			const result = await compressImage(filePath, tempPath, isThumbnail);
@@ -146,7 +134,6 @@ async function compressAllImages() {
 			1
 		)}%)`
 	);
-	console.log("\n📦 Original files backed up in 'originals' folders");
 }
 
 compressAllImages().catch(console.error);

@@ -17,8 +17,11 @@ function App() {
 	const handleBackgroundClick = () => {
 		if (expandedCard) {
 			setExpandedCard(null);
-		} else if (activeFilter !== "all") {
-			setActiveFilter("all");
+		} else {
+			// Always reset filter when clicking background
+			if (activeFilter !== "all") {
+				setActiveFilter("all");
+			}
 		}
 	};
 

@@ -6,8 +6,12 @@ import ProjectCard from "./ProjectCard";
 import "./ProjectGrid.css";
 
 function ProjectGrid({ expandedCard, setExpandedCard, activeFilter }) {
-	const handleCardClick = (projectId, event) => {
+	const handleCardClick = (projectId, isFiltered, event) => {
 		event.stopPropagation();
+		// Don't do anything if the card is filtered out
+		if (isFiltered) {
+			return;
+		}
 		setExpandedCard(expandedCard === projectId ? null : projectId);
 	};
 
@@ -27,7 +31,7 @@ function ProjectGrid({ expandedCard, setExpandedCard, activeFilter }) {
 						project={project}
 						isExpanded={expandedCard === project.id}
 						isFiltered={isFiltered}
-						onClick={(e) => handleCardClick(project.id, e)}
+						onClick={(e) => handleCardClick(project.id, isFiltered, e)}
 					/>
 				);
 			})}

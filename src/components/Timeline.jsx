@@ -76,7 +76,7 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 					);
 				})}{" "}
 				{/* All project dots */}
-				{projects.map((project) => {
+				{projects.map((project, index) => {
 					if (!project.date) return null;
 
 					const dotPosition = calculateDotPosition(project.date);
@@ -87,7 +87,7 @@ function Timeline({ selectedDate, projects, onProjectSelect, activeFilter }) {
 						<div
 							key={project.id}
 							className={`timeline-dot-vertical ${isFiltered ? "timeline-dot-filtered" : ""}`}
-							style={{ "--dot-position": `${dotPosition}%` }}
+							style={{ "--dot-position": `${dotPosition}%`, "--dot-index": index }}
 							onClick={(e) => handleEmptyDotClick(project.id, isFiltered, e)}
 							title={project.title}
 						/>

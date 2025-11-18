@@ -13,7 +13,7 @@ function ProjectGrid({ expandedCard, setExpandedCard, activeFilter }) {
 		// Remove initial-load class after animation completes
 		const timer = setTimeout(() => {
 			setIsInitialLoad(false);
-		}, 900); // 9 cards * 0.05s + 0.4s animation
+		}, 2000); // Increased for longer stagger effect
 		return () => clearTimeout(timer);
 	}, []);
 	const handleCardClick = (projectId, isFiltered, event) => {

@@ -35,7 +35,7 @@ function ProjectCard({ project, isExpanded, isFiltered, onClick, isInitialLoad, 
 			}}
 			style={{
 				aspectRatio: "1 / 1",
-				"--animation-delay": `${animationIndex * 0.05}s`,
+				"--animation-delay": `${animationIndex * 0.15}s`,
 			}}>
 			<img src={thumbnail} alt={project.title} className="card-thumbnail" />
 			<div className="card-overlay">

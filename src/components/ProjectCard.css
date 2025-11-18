@@ -23,7 +23,7 @@
 /* Initial page load animation - only applied to initial-load class */
 .project-card.initial-load {
 	opacity: 0;
-	animation: fadeInLoad 0.4s ease-out forwards;
+	animation: fadeInLoad 0.8s ease-out forwards;
 }
 
 .project-card * {

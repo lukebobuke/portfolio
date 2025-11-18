@@ -1,5 +1,36 @@
 /** @format */
 
+@keyframes fadeInTimeline {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideInDotVertical {
+	from {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideInDotHorizontal {
+	from {
+		transform: translate(calc(-50% - 100px), -50%);
+		opacity: 0;
+	}
+	to {
+		transform: translate(-50%, -50%);
+		opacity: 1;
+	}
+}
+
 .timeline-container {
 	background-color: black;
 	position: fixed;
@@ -59,6 +90,9 @@
 	border-radius: 50%;
 	cursor: pointer;
 	z-index: 1;
+	opacity: 0;
+	animation: slideInDotVertical 0.4s ease-out forwards;
+	animation-delay: calc(var(--dot-index, 0) * 0.05s + 2.2s);
 }
 
 @media (hover: hover) {
@@ -130,6 +164,8 @@
 		top: 50%;
 		left: calc(100% - var(--dot-position));
 		transform: translate(-50%, -50%);
+		animation: slideInDotHorizontal 0.4s ease-out forwards;
+		animation-delay: calc(var(--dot-index, 0) * 0.05s + 2.2s);
 	}
 
 	.timeline-dot-filled-vertical {
